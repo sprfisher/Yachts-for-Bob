@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Template</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .options button:hover {
+            background: #0056b3;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="quiz">
+            <div class="question" id="question"></div>
+            <div class="options" id="options"></div>
+        </div>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        let questions = [    {
+        question: "What type of yacht is designed for long-distance cruising with a displacement hull?",
+        options: ["A. Motor Yacht", "B. Trawler", "C. Catamaran", "D. Sportfish"],
+        answer: "B"
+    },
+    {
+        question: "What distinguishes a catamaran from other yacht types?",
+        options: ["A. Multiple decks", "B. Twin hulls", "C. High speed", "D. Large flybridge"],
+        answer: "B"
+    },
+    {
+        question: "Which type of yacht is primarily used for competitive racing or casual sailing?",
+        options: ["A. Trawler", "B. Sailing Yacht", "C. Explorer Yacht", "D. Mega Yacht"],
+        answer: "B"
+    },
+    {
+        question: "What is a defining characteristic of a superyacht?",
+        options: ["A. Under 20 feet", "B. Over 80 feet", "C. Luxury finishes", "D. Designed for speed"],
+        answer: "B"
+    },
+    {
+        question: "Which type of yacht is ideal for offshore fishing?",
+        options: ["A. Sportfish Yacht", "B. Trawler", "C. Catamaran", "D. Cruiser"],
+        answer: "A"
+    },
+    {
+        question: "What is the typical length range of a mega yacht?",
+        options: ["A. 50-80 feet", "B. 80-200 feet", "C. 200+ feet", "D. 30-50 feet"],
+        answer: "B"
+    },
+    {
+        question: "Which yacht type is known for high speeds and sleek designs?",
+        options: ["A. Sailing Yacht", "B. Motor Yacht", "C. Cruiser", "D. Day Boat"],
+        answer: "B"
+    },
+    {
+        question: "What type of yacht has a shallow draft and is suitable for navigating shallow waters?",
+        options: ["A. Catamaran", "B. Cruiser", "C. Trawler", "D. Sportfish"],
+        answer: "A"
+    },
+    {
+        question: "What is the primary feature of an explorer yacht?",
+        options: ["A. Large sundeck", "B. Long range and rugged design", "C. High speed", "D. Built-in fishing equipment"],
+        answer: "B"
+    },
+    {
+        question: "Which type of yacht typically includes luxurious amenities such as swimming pools and helipads?",
+        options: ["A. Superyacht", "B. Sportfish", "C. Day Boat", "D. Catamaran"],
+        answer: "A"
+    },
+    {
+        question: "What type of hull is most commonly found on trawlers?",
+        options: ["A. Displacement", "B. Planing", "C. Catamaran", "D. Semi-displacement"],
+        answer: "A"
+    },
+    {
+        question: "Which yacht type is designed for extended trips and has ample onboard storage?",
+        options: ["A. Trawler", "B. Day Boat", "C. Sportfish", "D. Motor Yacht"],
+        answer: "A"
+    },
+    {
+        question: "Which type of yacht is best suited for water sports such as wakeboarding or skiing?",
+        options: ["A. Day Boat", "B. Superyacht", "C. Catamaran", "D. Explorer Yacht"],
+        answer: "A"
+    },
+    {
+        question: "What term describes the vertical distance from the waterline to the top of the yacht?",
+        options: ["A. Beam", "B. Draft", "C. Freeboard", "D. Mast height"],
+        answer: "C"
+    },
+    {
+        question: "What is the main purpose of a flybridge on a yacht?",
+        options: ["A. Sleeping quarters", "B. Outdoor navigation and lounging", "C. Fuel storage", "D. Engine access"],
+        answer: "B"
+    },
+    {
+        question: "Which yacht type is known for having multiple levels and spacious interiors?",
+        options: ["A. Superyacht", "B. Catamaran", "C. Sailing Yacht", "D. Cruiser"],
+        answer: "A"
+    },
+    {
+        question: "Which type of yacht is characterized by a planing hull for high-speed travel?",
+        options: ["A. Motor Yacht", "B. Trawler", "C. Sailing Yacht", "D. Explorer Yacht"],
+        answer: "A"
+    },
+    {
+        question: "What is the primary use of a tender on a yacht?",
+        options: ["A. Backup propulsion", "B. Transport to shore or other vessels", "C. Fuel storage", "D. Fishing"],
+        answer: "B"
+    },
+    {
+        question: "What is the term for the width of a yacht at its widest point?",
+        options: ["A. Length", "B. Draft", "C. Beam", "D. Freeboard"],
+        answer: "C"
+    },
+    {
+        question: "Which yacht type is best suited for entertaining large groups during the day?",
+        options: ["A. Day Boat", "B. Explorer Yacht", "C. Trawler", "D. Sailing Yacht"],
+        answer: "A"
+    },
+    {
+        question: "What type of yacht is most commonly used for liveaboard lifestyles?",
+        options: ["A. Trawler", "B. Day Boat", "C. Superyacht", "D. Catamaran"],
+        answer: "A"
+    },
+    {
+        question: "What is the primary benefit of a semi-displacement hull?",
+        options: ["A. Fuel efficiency and stability", "B. Maximum speed", "C. Maneuverability", "D. Shallow draft"],
+        answer: "A"
+    },
+    {
+        question: "What material is most commonly used to construct modern yachts?",
+        options: ["A. Steel", "B. Aluminum", "C. Fiberglass", "D. Wood"],
+        answer: "C"
+    },
+    {
+        question: "Which yacht type is best suited for navigating open oceans and remote locations?",
+        options: ["A. Explorer Yacht", "B. Day Boat", "C. Sportfish", "D. Motor Yacht"],
+        answer: "A"
+    },
+    {
+        question: "What does the term 'draft' refer to in yacht design?",
+        options: ["A. Distance from the waterline to the keel", "B. Beam of the yacht", "C. Overall length", "D. Freeboard height"],
+        answer: "A"
+    }]; // Placeholder for questions array
+        let currentQuestion = 0;
+        let score = 0;
+        const incorrectAnswers = [];
+
+        function loadQuestion() {
+            if (currentQuestion >= questions.length) {
+                showResults();
+                return;
+            }
+            const questionObj = questions[currentQuestion];
+            document.getElementById("question").textContent = questionObj.question;
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = "";
+            questionObj.options.forEach(option => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => checkAnswer(option);
+                optionsDiv.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedOption) {
+            const current = questions[currentQuestion];
+            if (selectedOption.startsWith(current.answer)) {
+                score++;
+            } else {
+                incorrectAnswers.push(`Question: ${current.question}, Your Answer: ${selectedOption}, Correct Answer: ${current.answer}`);
+            }
+            currentQuestion++;
+            loadQuestion();
+        }
+
+        function showResults() {
+            const quizDiv = document.getElementById("quiz");
+            quizDiv.innerHTML = `
+                <div class="result">
+                    <h2>Quiz Complete!</h2>
+                    <p>Your Score: ${score}/${questions.length}</p>
+                    <h3>Incorrect Answers:</h3>
+                    <ul>${incorrectAnswers.map(ans => `<li>${ans}</li>`).join("")}</ul>
+                </div>
+            `;
+        }
+
+        loadQuestion(); // Start the quiz
+    </script>
+</body>
+</html>
